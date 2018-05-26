@@ -32,6 +32,8 @@ services:
             - MYSQL_RANDOM_ROOT_PASSWORD=1
         networks:
             - backend
+        volumes:
+            - db-data:/var/lib/mysql
 
     redis:
         image: redis:alpine
@@ -44,3 +46,6 @@ networks:
         driver: bridge
     backend:
         driver: bridge
+
+volumes:
+    db-data:
