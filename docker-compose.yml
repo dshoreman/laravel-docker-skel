@@ -4,6 +4,8 @@ services:
     web:
         container_name: myapp_web
         image: nginx:stable-alpine
+        networks:
+            - frontend
         ports:
             - '8080:80'
         volumes:
@@ -14,6 +16,9 @@ services:
             context: .
             dockerfile: ./build/php/Dockerfile
         container_name: myapp_php
+        networks:
+            - backend
+            - frontend
         volumes:
             - ./src:/myapp
 
@@ -25,3 +30,11 @@ services:
             - MYSQL_USER=myapp
             - MYSQL_PASSWORD=secret
             - MYSQL_RANDOM_ROOT_PASSWORD=1
+        networks:
+            - backend
+
+networks:
+    frontend:
+        driver: bridge
+    backend:
+        driver: bridge
