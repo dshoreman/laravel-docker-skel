@@ -1,4 +1,6 @@
 ccp:
+	docker-compose down && rm -rf src
+	mkdir src && docker-compose up -d
 	docker run --rm -it \
 		--user `id -u`:82 \
 		--volume `pwd`/src:/myapp \
