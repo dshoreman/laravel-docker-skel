@@ -16,3 +16,12 @@ services:
         container_name: myapp_php
         volumes:
             - ./src:/myapp
+
+    db:
+        image: mariadb:10.2
+        container_name: myapp_db
+        environment:
+            - MYSQL_DATABASE=myapp
+            - MYSQL_USER=myapp
+            - MYSQL_PASSWORD=secret
+            - MYSQL_RANDOM_ROOT_PASSWORD=1
