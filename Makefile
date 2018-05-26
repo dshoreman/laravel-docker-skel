@@ -6,3 +6,9 @@ fresh-install:
 		--volume `pwd`/src:/myapp \
 		composer:latest create-project --prefer-dist laravel/laravel /myapp
 	chmod -R ug+rwX src/storage
+
+rebuild:
+	docker-compose up --build -d
+
+compose:
+	docker-compose down && docker-compose up -d
