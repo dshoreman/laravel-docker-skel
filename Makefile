@@ -14,6 +14,11 @@ rebuild:
 compose:
 	docker-compose down && docker-compose up -d
 
+art:
+	@echo docker exec -it \
+		--workdir /myapp \
+		myapp_php ./artisan
+
 require:
 	docker run --rm -it \
 		--user `id -u`:82 \
