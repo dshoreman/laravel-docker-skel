@@ -33,6 +33,12 @@ services:
         networks:
             - backend
 
+    redis:
+        image: redis:alpine
+        container_name: myapp_redis
+        networks:
+            - backend
+
 networks:
     frontend:
         driver: bridge
