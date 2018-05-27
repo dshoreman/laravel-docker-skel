@@ -1,0 +1,51 @@
+version: '3.6'
+
+services:
+    web:
+        container_name: myapp_web
+        image: nginx:stable-alpine
+        networks:
+            - frontend
+        ports:
+            - '8080:80'
+        volumes:
+            - ./src:/myapp
+            - './build/nginx/server.conf:/etc/nginx/conf.d/default.conf'
+    php:
+        build:
+            context: .
+            dockerfile: ./build/php/Dockerfile
+        container_name: myapp_php
+        networks:
+            - backend
+            - frontend
+        volumes:
+            - ./src:/myapp
+
+    db:
+        image: mariadb:10.2
+        container_name: myapp_db
+        environment:
+            - MYSQL_DATABASE=myapp
+            - MYSQL_USER=myapp
+            - MYSQL_PASSWORD=secret
+            - MYSQL_RANDOM_ROOT_PASSWORD=1
+        networks:
+            - backend
+        volumes:
+            - db-data:/var/lib/mysql
+
+    redis:
+        image: redis:alpine
+        container_name: myapp_redis
+        networks:
+            - backend
+
+networks:
+    frontend:
+        driver: bridge
+    backend:
+        driver: bridge
+
+volumes:
+    db-data:
