@@ -74,10 +74,11 @@ $(make art) auth:make
 If you're a fan of shell aliases, you can shorten that to `dpa migrate`:
 
 ```
-# ~/.bashrc (host machine)
-
 alias dpa="$(make art)"
 ```
+
+Note: Avoid adding this alias to your shell's `rc` file. When taking this
+approach, you may need to `. ~/.bashrc` after changing directories.
 
 
 ### Basic Composer Requirements
