@@ -6,7 +6,7 @@ fresh-install:
 		--volume `pwd`/src:/myapp \
 		composer:latest create-project --prefer-dist laravel/laravel /myapp
 	make require pkg=predis/predis
-	chmod -R ug+rwX src/storage
+	chmod -R ug+rwX src/storage && $(make art) make:auth && $(make art) migrate
 
 rebuild:
 	docker-compose up --build -d
